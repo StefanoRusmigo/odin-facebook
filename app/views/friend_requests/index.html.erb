@@ -1,0 +1,10 @@
+<% unless @friend_requests.nil? %>
+<% @friend_requests.each do |request|  %>
+<% user = User.find(request.user_id) %>
+<%= user.name  %>
+<%= user.email %>
+<%= link_to "accept", friendships_create_path(friend_request:request)  %>
+<%= link_to "decline",friend_requests_destroy_path(friend_request:request), method: :delete  %>
+<% end %>
+<% end %>
+<hr>
