@@ -1,0 +1,7 @@
+<h1><%= @user.name %></h1>
+<% if @user.posts.count == 0 %>
+	The user has no posts yet
+<% else %>
+
+<%= render @user.posts %>
+<% end %>

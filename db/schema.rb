@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170906155255) do
+ActiveRecord::Schema.define(version: 20170925153326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.integer "parent_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "friend_requests", force: :cascade do |t|
     t.bigint "user_id"
@@ -34,12 +46,29 @@ ActiveRecord::Schema.define(version: 20170906155255) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "likeable_id"
+    t.string "likeable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_id", "likeable_type"], name: "index_likes_on_likeable_id_and_likeable_type"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,5 +91,6 @@ ActiveRecord::Schema.define(version: 20170906155255) do
 
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
 end

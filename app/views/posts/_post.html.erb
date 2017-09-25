@@ -1,0 +1,9 @@
+<%= link_to post.user.name,post.user  %> <%= post.created_at.time%> </br>
+<%= post.content %> </br>
+<%= render 'shared/comment', type:"Post", id:post.id %>
+<% unless post.likes.find_by(user:current_user) %>
+<%= button_to :like, likes_create_path(type:"Post",id:post.id) %>
+<% else %>
+<%= button_to :unlike, likes_destroy_path(type:"Post",id:post.id), method: :delete %>
+<% end %>
+</br></br>

@@ -3,9 +3,11 @@
   <%= user.name   %> 
   <%= user.email  %> 
   <% if  current_user.friends.include?(user)   %> 
-  <%= link_to "view profile","" %> 
+  <%= link_to "view profile",user %> 
   <% elsif current_user.pending_requests.include?(user)  %>
-  <% #Invitation pending  %>  
+  pending invitation
+  <%= link_to("delete", friend_requests_destroy_path(friend_id:user.id),
+  method: :delete) %>  
   <% else %> 
   <%= link_to("Invite", friend_requests_create_path(friend_id:user.id),method: :post ) %>    
  <% end %>

@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
   	current_user.friends.where(friend)
   	current_user.friend_requests.where(friend:friend).delete
 
-  	redirect_to root
+  	redirect_back(fallback_location: root_path)
   	
   end
 end
