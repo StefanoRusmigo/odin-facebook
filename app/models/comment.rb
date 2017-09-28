@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
 	validates_presence_of :content
 	has_many :replies, class_name:"Comment", foreign_key: :parent_id
 	belongs_to :parent, class_name:"Comment",required:false
+	default_scope { order(created_at: :asc) }
+
 end

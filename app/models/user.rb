@@ -16,6 +16,8 @@ class User < ApplicationRecord
     has_many :posts
     has_many :likes
     has_many :comments
+    has_one :profile, dependent: :destroy
+    accepts_nested_attributes_for :profile
 
 
 
@@ -27,6 +29,13 @@ class User < ApplicationRecord
   def friend_exists?(rel)
     rel.friends.exists?(self.id)
   end
-
+  
+  def timeline
+    timeline = friends.map do |friend|
+      friend.posts
+    end
+    timeline <<  posts
+    timeline.flatten.sort_by(&:created_at).reverse
+  end
  
 end

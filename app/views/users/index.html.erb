@@ -1,7 +1,6 @@
 <% @users.each do |user| %>
 	<% next if user == current_user %>
-  <%= user.name   %> 
-  <%= user.email  %> 
+  <%= render user %>
   <% if  current_user.friends.include?(user)   %> 
   <%= link_to "view profile",user %> 
   <% elsif current_user.pending_requests.include?(user)  %>

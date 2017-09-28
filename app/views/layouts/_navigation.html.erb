@@ -1,0 +1,29 @@
+	<table>
+		 <tr>Signed in as <%= current_user.email %></tr>
+
+		<tr>
+			<td><%= link_to (image_tag gravatar_url(current_user),size:100), 
+			                 root_url %></td>
+
+
+
+    
+     	<td><%= link_to "Sign out", destroy_user_session_path, 
+						     method: :delete%></td>
+			<td><%= link_to "Users", users_path %></td>
+			<td><%= link_to "#{FriendRequest.friend_requests_count(current_user)} friend requests", requests_path%></td>
+			<td><%= link_to("Friends", friends_path) %> </td>
+		
+
+
+
+
+   
+		</tr>
+
+
+	</table>
+
+	
+    
+    

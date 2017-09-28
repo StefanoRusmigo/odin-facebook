@@ -1,6 +1,6 @@
 <%= form_for :comment, url:comments_create_path do |f| %>
-<%= f.text_area :content %> 
+<%= f.text_field :content %> 
 <%=  f.hidden_field :commentable_type,value:type  %>
 <%=  f.hidden_field :commentable_id,value:id %>
-<%= f.submit %>
+<%= f.submit :comment %>
 <% end %>

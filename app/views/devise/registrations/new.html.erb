@@ -21,6 +21,27 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+
+ <% resource.build_profile %>
+  <%= f.fields_for :profile_attributes do |profile_form| %>
+   <div class="field">
+     <%= profile_form.label :name, "name*" %>
+     <%= profile_form.text_field :name %>
+   </div>
+
+    <div class="field">
+    <%= profile_form.label :surname, "surname*" %>
+    <%= profile_form.text_field :surname %>
+   </div>
+
+    <div class="field">
+    <%= profile_form.label :avatar_url, "profile URL" %>
+    <%= profile_form.text_field :avatar_url %>
+   </div>
+
+   <% end %>
+
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

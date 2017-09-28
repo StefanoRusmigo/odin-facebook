@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   delete 'friend_requests/destroy'
 
   devise_for :users, controllers: {
-        sessions: 'users/sessions'
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
       }
 
   resources :users, only: [:index,:show]

@@ -1,5 +1,5 @@
 <h1>Friends</h1>
 
 <% @friends.each do |friend| %>
-<%= link_to friend.name, friend %> <%= link_to "delete", friend %>
+<%= link_to friend.profile.full_name, friend %> <%= link_to "delete", friend %>
 <% end %>

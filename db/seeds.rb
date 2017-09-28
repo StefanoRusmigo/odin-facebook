@@ -3,14 +3,16 @@
 
 User.delete_all
 
-User.create(name: "Stefano Rusmogp",
-			email: "stefo29@msn.com",
+User.create(email: "stefo29@msn.com",
 			password:"z29081990",
-			password_confirmation:"z29081990")
+			password_confirmation:"z29081990").create_profile(name:"Stefano",
+															  surname: "Rusmigo",
+															  avatar_url:"https://pbs.twimg.com/profile_images/3217410670/e21f8b532a006b13ba8d103f72f5fd4a.jpeg")
 
 10.times do 
-User.create(name:Faker::Name.name,
-			email:Faker::Internet.email,
-			password:"password1",
-			password_confirmation:"password1")
+user = User.create(email:Faker::Internet.email,
+				  password:"password1",
+				  password_confirmation:"password1")
+user.create_profile(name:Faker::Name.first_name,
+					surname:Faker::Name.last_name)
 end
