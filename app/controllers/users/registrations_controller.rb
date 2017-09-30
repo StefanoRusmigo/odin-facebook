@@ -44,6 +44,10 @@ devise_parameter_sanitizer.permit(:sign_up) do |user_params|
 end
 
 end
+
+
+
+
 #devise_parameter_sanitizer.permit(:sign_up) { |u|
  # u.permit( :profile_attributes => [:name, :surname, :avatar_url]) }
 
