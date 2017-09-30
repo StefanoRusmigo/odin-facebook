@@ -1,6 +1,6 @@
 class WelcomeMailer < ApplicationMailer
 
-require 'sendgrid-ruby'
+require 'sendgrid'
 include SendGrid
 
 
