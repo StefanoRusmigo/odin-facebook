@@ -19,7 +19,6 @@ class User < ApplicationRecord
     has_one :profile, dependent: :destroy
     accepts_nested_attributes_for :profile
     devise :omniauthable, :omniauth_providers => [:facebook]
-    after_create { WelcomeMailer.welcome_email(self).deliver}
 
 
 
