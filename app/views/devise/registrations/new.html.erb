@@ -21,7 +21,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-
+ 
  <% resource.build_profile %>
   <%= f.fields_for :profile_attributes do |profile_form| %>
    <div class="field">
@@ -40,6 +40,9 @@
    </div>
 
    <% end %>
+ <div class="field">
+  <%= f.file_field :avatar %>
+ </div>
 
 
   <div class="actions">

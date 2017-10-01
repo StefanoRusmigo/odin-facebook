@@ -1,20 +1,37 @@
-<table>
-<tr> <%= link_to post.user.name,post.user  %> </tr>
-<tr><%= post.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></tr></br>
-<tr><%= post.content %></td></tr>
-<tr>
+<table style="margin-bottom:35px; float:left; width:50%; ">
+<tr><td> <%= link_to post.user.profile.full_name,post.user  %></td> </tr>
+<tr> <td><%= post.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></td></tr></br>
+<tr><td><%= image_tag post.avatar.url(:medium) if post.avatar.present? %></td></tr></br>
+<tr><td><%= post.content %></td></tr>
+<tr >
 <td>
 <% unless post.likes.find_by(user:current_user) %>
-<%= button_to :like, likes_create_path(type:"Post",id:post.id) %>
-<% else %>
-<%= button_to :unlike, likes_destroy_path(type:"Post",id:post.id), method: :delete %>
+<%= button_to likes_create_path(type:"Post",id:post.id) do %>
+	 <i class="fa fa-thumbs-up"></i>
 <% end %>
-</td>
-<td><%= post.likes.count %></td>
-</tr>
-</table>
-<%= render 'shared/comment', type:"Post", id:post.id %>
+<% else %>
+<%= button_to likes_destroy_path(type:"Post",id:post.id), method: :delete do %>
+<i class="fa fa-thumbs-down"></i>
+<% end %>
+<% end %>
 
-<%= pluralize( post.comments.count, 'comment' ) %>: </br>
-<%= render post.comments %>
+<%= post.likes.count %>
+</td>
+</tr>
+
+
+</table>
+<div style="float: left">
+<table>
+	<tr>
+		<td> <%= render 'shared/comment', type:"Post", id:post.id %></td>
+	    <td><%= pluralize( post.comments.count, 'comment' ) %>: </td>
+	</tr>
+	<tr><td><%= render post.comments %></td></tr>
+</table>
+
+</div>
+
+<div style="clear:both;"></div>
+
 
